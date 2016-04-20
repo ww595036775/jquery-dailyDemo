@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>viwqport</title>
+    <script style="text/javascript" src="/test/jquery/jquery-1.9.1.js"></script>
+    <script>
+        $(function () {
+            /**  检测视窗大小 */
+            var responsive_viewport = $(window).width();
+            /* if is below 481px */
+            if (responsive_viewport < 481) {
+                alert('Viewport is smaller than 481px.');
+            }
+
+            /** 平稳滑动到页面顶部 */
+            $("a[href='#top']").click(function () {
+                console.log("触发")
+                $("html, body").animate({scrollTop: 0}, "slow");
+                return false;
+            });
+
+            /** 遇到外部链接自动添加target=”blank”的属性 */
+            var root = location.protocol + '//' + location.host;
+            $('a').not(':contains(root)').click(function () {
+                this.target = "_blank";
+            });
+
+            /** 在文本或密码输入时禁止空格键 */
+            $('input.nospace').keydown(function (e) {
+                if (e.keyCode == 32) {
+                    console.log("选择空格")
+                    return false;
+                }
+            });
+
+            /** 检测复制、粘贴和剪切的操作 */
+            $("#text").bind('copy', function () {
+                $('span').text('copy behaviour detected!')
+            });
+            $("#text").bind('paste', function () {
+                $('span').text('paste behaviour detected!')
+            });
+            $("#text").bind('cut', function () {
+                $('span').text('cut behaviour detected!')
+            });
+
+            /** 在图片上停留时逐渐增强或减弱的透明效果 */
+            $(".thumbs img").fadeTo("slow", 0.6); // This sets the opacity of the thumbs to fade down to 60% when the page loads
+
+            $(".thumbs img").hover(function () {
+                $(this).fadeTo("slow", 1.0); // This should set the opacity to 100% on hover
+            }, function () {
+                $(this).fadeTo("slow", 0.6); // This should set the opacity back to 60% on mouseout
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>测试</h1>
+<a href="http://www.jiemian.com/article/613653.html">外部链接</a><br/>
+用户名:<input type="text" class="nospace"><br/>
+<div class="thumbs">
+    <img src="test/car.jpg" style="width: 200px;height: auto"/>
+</div>
+<span style="color: red"></span>
+<div id="text">
+    qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+    qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>qqqqqqqqqq<br/>
+
+</div>
+<a id="top" href="#top">返回顶部</a>
+</body>
+</html>
